@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyectores</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+    }
+    a { text-decoration: none; color: blue; }
+  </style>
+</head>
+<body>
+
+<h1>Lista de Proyectores</h1>
+<div id="lista"></div>
+
+<script>
+fetch("proyectores.json")
+  .then(res => res.json())
+  .then(data => {
+    const contenedor = document.getElementById("lista");
+
+    data.forEach(p => {
+      contenedor.innerHTML += `
+        <div class="card">
+          <h3>${p.id} - ${p.modelo}</h3>
+          <p>Marca: ${p.marca}</p>
+          <p>Resolución: ${p.resolucion}</p>
+          <a href="proyector.html?id=${p.id}">Ver detalles</a>
+        </div>
+      `;
+    });
+  });
+</script>
+
+</body>
+</html>

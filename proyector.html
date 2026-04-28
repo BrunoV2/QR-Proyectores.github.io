@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyector</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+  </style>
+</head>
+<body>
+
+<h1 id="titulo"></h1>
+<div id="info"></div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+fetch("proyectores.json")
+  .then(res => res.json())
+  .then(data => {
+    const p = data.find(x => x.id === id);
+
+    if (!p) {
+      document.body.innerHTML = "Proyector no encontrado";
+      return;
+    }
+
+    document.getElementById("titulo").innerText = p.id + " - " + p.modelo;
+
+    document.getElementById("info").innerHTML = `
+      <p><b>Marca:</b> ${p.marca}</p>
+      <p><b>Serie:</b> ${p.numero_serie}</p>
+      <p><b>Lámpara:</b> ${p.tipo_lampara}</p>
+      <p><b>Precio:</b> ${p.precio}</p>
+      <p><b>Horas:</b> ${p.horas}</p>
+      <p><b>Resolución:</b> ${p.resolucion}</p>
+      <p><b>Conexiones:</b> ${p.conexiones}</p>
+      <p><b>Incidencia:</b> ${p.incidencia}</p>
+      <p><b>Ubicación:</b> ${p.ubicacion}</p>
+    `;
+  });
+</script>
+
+</body>
+</html>
