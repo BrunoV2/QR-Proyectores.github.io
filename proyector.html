@@ -3,41 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <title>Proyector</title>
+
   <style>
-    body { font-family: Arial; padding: 20px; }
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: #e9e9e9;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 3/4.5;
+      background: #ffffff;
+      border-radius: 20px;
+      border: 4px solid #dcdcdc;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #ccc;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .title {
+      margin-top: 12px;
+      font-size: 22px;
+      font-weight: 700;
+      text-align: center;
+      color: #222;
+      letter-spacing: 0.5px;
+    }
+
+    .stats-box {
+      margin-top: 12px;
+      background: #f7f7f7;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid #e0e0e0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stat {
+      font-size: 15px;
+      margin: 4px 0;
+      color: #444;
+    }
+
+    .stat b {
+      color: #111;
+    }
+
+    .footer {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .not-found {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid #ccc;
+      text-align: center;
+      font-weight: bold;
+      color: #333;
+      max-width: 300px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
+
 <body>
 
-<h1 id="titulo"></h1>
-<div id="info"></div>
+<div id="contenido">Cargando...</div>
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const serie = params.get("proyector");
 
 fetch("proyectores.json")
   .then(res => res.json())
   .then(data => {
-    const p = data.find(x => x.id === id);
 
-    if (!p) {
-      document.body.innerHTML = "Proyector no encontrado";
+    const proyector = data.find(p => p.numero_serie === serie);
+
+    if (!proyector) {
+      document.getElementById("contenido").innerHTML =
+        `<div class="not-found">❌ Proyector no encontrado</div>`;
       return;
     }
 
-    document.getElementById("titulo").innerText = p.id + " - " + p.modelo;
+    const foto = proyector.foto ? proyector.foto : "no-image.png";
 
-    document.getElementById("info").innerHTML = `
-      <p><b>Marca:</b> ${p.marca}</p>
-      <p><b>Serie:</b> ${p.numero_serie}</p>
-      <p><b>Lámpara:</b> ${p.tipo_lampara}</p>
-      <p><b>Precio:</b> ${p.precio}</p>
-      <p><b>Horas:</b> ${p.horas}</p>
-      <p><b>Resolución:</b> ${p.resolucion}</p>
-      <p><b>Conexiones:</b> ${p.conexiones}</p>
-      <p><b>Incidencia:</b> ${p.incidencia}</p>
-      <p><b>Ubicación:</b> ${p.ubicacion}</p>
+    document.getElementById("contenido").innerHTML = `
+      <div class="card">
+        <img src="${foto}" alt="Foto del proyector">
+
+        <div class="title">${proyector.id} – ${proyector.modelo}</div>
+
+        <div class="stats-box">
+          <div class="stat"><b>Marca:</b> ${proyector.marca}</div>
+          <div class="stat"><b>Nº proyector:</b> ${proyector.numero_serie}</div>
+          <div class="stat"><b>Lámpara:</b> ${proyector.tipo_lampara}</div>
+          <div class="stat"><b>Precio:</b> ${proyector.precio}</div>
+          <div class="stat"><b>Horas:</b> ${proyector.horas}</div>
+          <div class="stat"><b>Resolución:</b> ${proyector.resolucion}</div>
+          <div class="stat"><b>Conexiones:</b> ${proyector.conexiones}</div>
+          <div class="stat"><b>Incidencia:</b> ${proyector.incidencia || "Ninguna"}</div>
+          <div class="stat"><b>Ubicación:</b> ${proyector.ubicacion}</div>
+        </div>
+
+        <div class="footer">Colección Proyectores • 2026</div>
+      </div>
     `;
   });
 </script>
