@@ -31,27 +31,27 @@
     }
 
     .cards-fila {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas fijas */
+      gap: 15px;
+      max-width: 800px;
     }
 
     .card {
       border: 1px solid #ccc;
-      padding: 10px;
+      padding: 18px;
       border-radius: 10px;
-      min-width: 180px;
-      max-width: 220px;
     }
 
     .card strong {
       display: block;
-      margin-bottom: 5px;
+      font-size: 1.1em;
+      margin-bottom: 8px;
     }
 
     .card p {
-      margin: 3px 0;
-      font-size: 0.85em;
+      margin: 5px 0;
+      font-size: 0.95em;
       color: #333;
     }
 
@@ -62,10 +62,10 @@
 
     .card a {
       display: inline-block;
-      margin-top: 8px;
+      margin-top: 10px;
       text-decoration: none;
       color: blue;
-      font-size: 0.85em;
+      font-size: 0.9em;
     }
   </style>
 </head>
@@ -79,7 +79,6 @@ fetch("proyectores.json")
   .then(data => {
     const contenedor = document.getElementById("lista");
 
-    // Agrupar por marca y luego por modelo
     const porMarca = {};
     data.forEach(p => {
       const marca = p.marca || "Sin marca";
@@ -103,13 +102,13 @@ fetch("proyectores.json")
         porMarca[marca][modelo].forEach(p => {
           const url = `proyector.html?proyector=${p.id}`;
 
-          const horas    = p.horas       ? `<p>⏱ ${p.horas}</p>` : "";
-          const res      = p.resolucion  ? `<p>📐 ${p.resolucion}</p>` : "";
-          const precio   = p.precio && p.precio !== "PRODUCTO NO DISPONIBLE"
-                           ? `<p>💶 ${p.precio}</p>` : "";
-          const noDisp   = p.precio === "PRODUCTO NO DISPONIBLE"
-                           ? `<p style="color:#e67e22;font-weight:bold;">⚠ No disponible</p>` : "";
-          const incid    = p.incidencia  ? `<p class="incidencia">⚠ ${p.incidencia}</p>` : "";
+          const horas   = p.horas      ? `<p>⏱ ${p.horas}</p>` : "";
+          const res     = p.resolucion ? `<p>📐 ${p.resolucion}</p>` : "";
+          const precio  = p.precio && p.precio !== "PRODUCTO NO DISPONIBLE"
+                          ? `<p>💶 ${p.precio}</p>` : "";
+          const noDisp  = p.precio === "PRODUCTO NO DISPONIBLE"
+                          ? `<p style="color:#e67e22;font-weight:bold;">⚠ No disponible</p>` : "";
+          const incid   = p.incidencia ? `<p class="incidencia">⚠ ${p.incidencia}</p>` : "";
 
           html += `
             <div class="card">
