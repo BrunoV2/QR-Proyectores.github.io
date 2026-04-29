@@ -104,20 +104,19 @@ fetch("proyectores.json")
         porMarca[marca][modelo].forEach(p => {
           const url = `proyector.html?proyector=${p.id}`;
 
-          const horas   = p.horas      ? `<p>⏱ ${p.horas}</p>` : "";
-          const res     = p.resolucion ? `<p>📐 ${p.resolucion}</p>` : "";
-          const precio  = p.precio && p.precio !== "PRODUCTO NO DISPONIBLE"
-                          ? `<p>💶 ${p.precio}</p>` : "";
+          const horas   = p.horas       ? `<p>⏱ ${p.horas}</p>` : "";
+          const res     = p.resolucion  ? `<p>📐 ${p.resolucion}</p>` : "";
+          const conex   = p.conexiones  ? `<p>🔌 ${p.conexiones}</p>` : "";
           const noDisp  = p.precio === "PRODUCTO NO DISPONIBLE"
                           ? `<p style="color:#e67e22;font-weight:bold;">⚠ No disponible</p>` : "";
-          const incid   = p.incidencia ? `<p class="incidencia">⚠ ${p.incidencia}</p>` : "";
+          const incid   = p.incidencia  ? `<p class="incidencia">⚠ ${p.incidencia}</p>` : "";
 
           html += `
             <div class="card">
               <strong>${p.id}</strong>
               ${horas}
               ${res}
-              ${precio}
+              ${conex}
               ${noDisp}
               ${incid}
               <a href="${url}">Ver detalles →</a>
