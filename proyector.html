@@ -26,12 +26,12 @@
   }
 
   /* FOTO MÁS PEQUEÑA Y AJUSTADA */
-  .card img {
+.card img {
     width: 100%;
-    height: 30vh; /* FOTO MÁS PEQUEÑA */
-    object-fit: contain; /* NO SE SALE */
+    height: 42vh;     /* FOTO MÁS GRANDE PERO CONTROLADA */
+    object-fit: contain;  /* NO SE SALE DEL MÓVIL */
     background: #00000010;
-  }
+}
 
   /* TÍTULO GRANDE */
   .title {
@@ -65,26 +65,25 @@
 
   /* BOTÓN GRANDE Y CÓMODO */
 .back-btn {
-    position: fixed;        /* FLOTANTE */
-    bottom: 20px;           /* SEPARADO DEL BORDE INFERIOR */
-    left: 50%;              /* CENTRADO */
+    position: fixed;          /* Flotante */
+    bottom: 40px;             /* Más arriba */
+    left: 50%;
     transform: translateX(-50%);
-    padding: 16px 28px;     /* TAMAÑO DEL BOTÓN */
-    background: #333;
-    color: white;
-    font-size: 22px;        /* TEXTO GRANDE */
-    font-weight: 800;
+
+    padding: 30px 60px;       /* EL TRIPLE DE GRANDE */
+    background: #000;         /* Negro total */
+    color: #fff;
+
+    font-size: 32px;          /* TEXTO GIGANTE */
+    font-weight: 900;         /* Súper grueso */
+
+    border-radius: 30px;      /* Bordes redondeados */
     text-decoration: none;
-    border-radius: 18px;    /* BORDES REDONDEADOS */
-    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-    z-index: 9999;          /* SIEMPRE ENCIMA */
-}
+    display: block;
 
-.back-btn:hover {
-    background: #555;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4); /* Sombra potente */
+    z-index: 9999;
 }
-
-  }
 </style>
 
 
