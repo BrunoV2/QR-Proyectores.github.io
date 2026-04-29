@@ -178,5 +178,20 @@
     "origen": "visunex",
     "ubicacion": "Almacen 1",
     "foto": "12.jpg"
+  },
+ {
+    "id": "P-129",
+    "marca": "Optoma",
+    "modelo": "H190X",
+    "numero_serie": "48548439RHFGKVNV",
+    "tipo_lampara": "Bombilla",
+    "precio": "399,00 €",
+    "horas": "999h",
+    "resolucion": "1280 x 800",
+    "conexiones": "VGA in, HDMI, RS232",
+    "incidencia": "",
+    "origen": "visunex",
+    "ubicacion": "Almacen 1",
+    "foto": "12.jpg"
   }
 ]

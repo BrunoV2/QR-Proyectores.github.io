@@ -26,12 +26,16 @@ fetch("proyectores.json")
     const contenedor = document.getElementById("lista");
 
     data.forEach(p => {
+
+      // ENLACE CORRECTO
+      const url = `proyector.html?proyector=${p.id}`;
+
       contenedor.innerHTML += `
         <div class="card">
           <h3>${p.id} - ${p.modelo}</h3>
           <p>Marca: ${p.marca}</p>
           <p>Resolución: ${p.resolucion}</p>
-          <a href="proyector.html?id=${p.id}">Ver detalles</a>
+          <a href="${url}">Ver detalles</a>
         </div>
       `;
     });

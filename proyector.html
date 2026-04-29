@@ -68,11 +68,22 @@
       color: #111;
     }
 
-    .footer {
-      margin-top: 12px;
+    .back-btn {
+      margin-top: 15px;
+      padding: 10px;
+      background: #333;
+      color: white;
       text-align: center;
-      font-size: 12px;
-      color: #777;
+      border-radius: 10px;
+      font-size: 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .back-btn:hover {
+      background: #555;
     }
 
     @keyframes fadeIn {
@@ -99,14 +110,15 @@
 <div id="contenido">Cargando...</div>
 
 <script>
+// Leer ?proyector=P-01
 const params = new URLSearchParams(window.location.search);
-const serie = params.get("proyector");
+const proyectorID = params.get("proyector");
 
 fetch("proyectores.json")
   .then(res => res.json())
   .then(data => {
 
-    const proyector = data.find(p => p.numero_serie === serie);
+    const proyector = data.find(p => p.id === proyectorID);
 
     if (!proyector) {
       document.getElementById("contenido").innerHTML =
@@ -114,7 +126,10 @@ fetch("proyectores.json")
       return;
     }
 
-    const foto = proyector.foto ? proyector.foto : "no-image.png";
+    // Cargar foto desde /Proyectores-IMG/
+    const foto = proyector.foto
+      ? `Proyectores-IMG/${proyector.foto}`
+      : "Proyectores-IMG/no-image.png";
 
     document.getElementById("contenido").innerHTML = `
       <div class="card">
@@ -124,7 +139,7 @@ fetch("proyectores.json")
 
         <div class="stats-box">
           <div class="stat"><b>Marca:</b> ${proyector.marca}</div>
-          <div class="stat"><b>Nº proyector:</b> ${proyector.numero_serie}</div>
+          <div class="stat"><b>Nº Serie:</b> ${proyector.numero_serie}</div>
           <div class="stat"><b>Lámpara:</b> ${proyector.tipo_lampara}</div>
           <div class="stat"><b>Precio:</b> ${proyector.precio}</div>
           <div class="stat"><b>Horas:</b> ${proyector.horas}</div>
@@ -134,7 +149,7 @@ fetch("proyectores.json")
           <div class="stat"><b>Ubicación:</b> ${proyector.ubicacion}</div>
         </div>
 
-        <div class="footer">Colección Proyectores • 2026</div>
+        <a href="index.html" class="back-btn">⬅ Volver</a>
       </div>
     `;
   });
