@@ -5,15 +5,7 @@
   <title>Proyectores</title>
   <style>
     body { font-family: Arial; padding: 20px; }
-    .card {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin: 10px;
-      border-radius: 10px;
-    }
-    a { text-decoration: none; color: blue; }
 
-    /* Grupo por marca */
     .grupo-marca {
       margin-bottom: 30px;
     }
@@ -26,36 +18,61 @@
       margin-bottom: 15px;
     }
 
-    /* Subgrupo por modelo */
     .grupo-modelo {
       margin-left: 15px;
       margin-bottom: 15px;
     }
     .grupo-modelo h3 {
       color: #555;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       font-size: 1em;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    /* Cards en fila horizontal por modelo */
     .cards-fila {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
+
     .card {
       border: 1px solid #ccc;
       padding: 10px;
       border-radius: 10px;
       min-width: 180px;
+      max-width: 220px;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .card p {
+      margin: 3px 0;
+      font-size: 0.85em;
+      color: #333;
+    }
+
+    .card .incidencia {
+      color: #c0392b;
+      font-style: italic;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 8px;
+      text-decoration: none;
+      color: blue;
+      font-size: 0.85em;
     }
   </style>
 </head>
 <body>
 <h1>Lista de Proyectores</h1>
 <div id="lista"></div>
+
 <script>
 fetch("proyectores.json")
   .then(res => res.json())
@@ -65,12 +82,15 @@ fetch("proyectores.json")
     // Agrupar por marca y luego por modelo
     const porMarca = {};
     data.forEach(p => {
-      if (!porMarca[p.marca]) porMarca[p.marca] = {};
-      if (!porMarca[p.marca][p.modelo]) porMarca[p.marca][p.modelo] = [];
-      porMarca[p.marca][p.modelo].push(p);
+      const marca = p.marca || "Sin marca";
+      const modelo = p.modelo || "Sin modelo";
+      if (!porMarca[marca]) porMarca[marca] = {};
+      if (!porMarca[marca][modelo]) porMarca[marca][modelo] = [];
+      porMarca[marca][modelo].push(p);
     });
 
     let html = "";
+
     for (const marca in porMarca) {
       html += `<div class="grupo-marca">`;
       html += `<h2>${marca}</h2><hr>`;
@@ -82,11 +102,24 @@ fetch("proyectores.json")
 
         porMarca[marca][modelo].forEach(p => {
           const url = `proyector.html?proyector=${p.id}`;
+
+          const horas    = p.horas       ? `<p>⏱ ${p.horas}</p>` : "";
+          const res      = p.resolucion  ? `<p>📐 ${p.resolucion}</p>` : "";
+          const precio   = p.precio && p.precio !== "PRODUCTO NO DISPONIBLE"
+                           ? `<p>💶 ${p.precio}</p>` : "";
+          const noDisp   = p.precio === "PRODUCTO NO DISPONIBLE"
+                           ? `<p style="color:#e67e22;font-weight:bold;">⚠ No disponible</p>` : "";
+          const incid    = p.incidencia  ? `<p class="incidencia">⚠ ${p.incidencia}</p>` : "";
+
           html += `
             <div class="card">
               <strong>${p.id}</strong>
-              <p>Resolución: ${p.resolucion}</p>
-              <a href="${url}">Ver detalles</a>
+              ${horas}
+              ${res}
+              ${precio}
+              ${noDisp}
+              ${incid}
+              <a href="${url}">Ver detalles →</a>
             </div>
           `;
         });
