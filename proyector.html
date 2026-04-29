@@ -35,7 +35,7 @@
 
   /* TÍTULO GRANDE */
   .title {
-    font-size: 32px; /* GRANDE DE VERDAD */
+    font-size: 80px; /* GRANDE DE VERDAD */
     font-weight: 800;
     text-align: center;
     margin: 10px 0;
@@ -64,20 +64,26 @@
   }
 
   /* BOTÓN GRANDE Y CÓMODO */
-  .back-btn {
-    width: 100%;
-    padding: 22px;
+.back-btn {
+    position: fixed;        /* FLOTANTE */
+    bottom: 20px;           /* SEPARADO DEL BORDE INFERIOR */
+    left: 50%;              /* CENTRADO */
+    transform: translateX(-50%);
+    padding: 16px 28px;     /* TAMAÑO DEL BOTÓN */
     background: #333;
     color: white;
-    text-align: center;
-    font-size: 24px;
+    font-size: 22px;        /* TEXTO GRANDE */
     font-weight: 800;
     text-decoration: none;
-    display: block;
-  }
+    border-radius: 18px;    /* BORDES REDONDEADOS */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    z-index: 9999;          /* SIEMPRE ENCIMA */
+}
 
-  .back-btn:hover {
+.back-btn:hover {
     background: #555;
+}
+
   }
 </style>
 
