@@ -83,7 +83,7 @@ fetch("proyectores.json")
 
     const porMarca = {};
     data.forEach(p => {
-      const marca = p.marca || "Sin marca";
+      const marca = (p.marca || "Sin marca").replace(/^Benq$/i, "BenQ");
       const modelo = p.modelo || "Sin modelo";
       if (!porMarca[marca]) porMarca[marca] = {};
       if (!porMarca[marca][modelo]) porMarca[marca][modelo] = [];
