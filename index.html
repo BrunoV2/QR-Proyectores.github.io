@@ -12,35 +12,93 @@
       border-radius: 10px;
     }
     a { text-decoration: none; color: blue; }
+
+    /* Grupo por marca */
+    .grupo-marca {
+      margin-bottom: 30px;
+    }
+    .grupo-marca h2 {
+      margin-bottom: 5px;
+    }
+    .grupo-marca hr {
+      border: none;
+      border-top: 2px solid #aaa;
+      margin-bottom: 15px;
+    }
+
+    /* Subgrupo por modelo */
+    .grupo-modelo {
+      margin-left: 15px;
+      margin-bottom: 15px;
+    }
+    .grupo-modelo h3 {
+      color: #555;
+      margin-bottom: 5px;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Cards en fila horizontal por modelo */
+    .cards-fila {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 10px;
+      min-width: 180px;
+    }
   </style>
 </head>
 <body>
-
 <h1>Lista de Proyectores</h1>
 <div id="lista"></div>
-
 <script>
 fetch("proyectores.json")
   .then(res => res.json())
   .then(data => {
     const contenedor = document.getElementById("lista");
 
+    // Agrupar por marca y luego por modelo
+    const porMarca = {};
     data.forEach(p => {
-
-      // ENLACE CORRECTO
-      const url = `proyector.html?proyector=${p.id}`;
-
-      contenedor.innerHTML += `
-        <div class="card">
-          <h3>${p.id} - ${p.modelo}</h3>
-          <p>Marca: ${p.marca}</p>
-          <p>Resolución: ${p.resolucion}</p>
-          <a href="${url}">Ver detalles</a>
-        </div>
-      `;
+      if (!porMarca[p.marca]) porMarca[p.marca] = {};
+      if (!porMarca[p.marca][p.modelo]) porMarca[p.marca][p.modelo] = [];
+      porMarca[p.marca][p.modelo].push(p);
     });
+
+    let html = "";
+    for (const marca in porMarca) {
+      html += `<div class="grupo-marca">`;
+      html += `<h2>${marca}</h2><hr>`;
+
+      for (const modelo in porMarca[marca]) {
+        html += `<div class="grupo-modelo">`;
+        html += `<h3>${modelo}</h3>`;
+        html += `<div class="cards-fila">`;
+
+        porMarca[marca][modelo].forEach(p => {
+          const url = `proyector.html?proyector=${p.id}`;
+          html += `
+            <div class="card">
+              <strong>${p.id}</strong>
+              <p>Resolución: ${p.resolucion}</p>
+              <a href="${url}">Ver detalles</a>
+            </div>
+          `;
+        });
+
+        html += `</div></div>`;
+      }
+
+      html += `</div>`;
+    }
+
+    contenedor.innerHTML = html;
   });
 </script>
-
 </body>
 </html>
