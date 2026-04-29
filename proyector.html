@@ -4,105 +4,91 @@
   <meta charset="UTF-8">
   <title>Proyector</title>
 
-  <style>
-    body {
-      font-family: "Inter", Arial, sans-serif;
-      background: #e9e9e9;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-    }
+ <style>
+  body {
+    font-family: "Inter", Arial, sans-serif;
+    background: #e9e9e9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Pantalla completa */
+  }
 
-    .card {
-      width: 100%;
-      max-width: 360px;
-      aspect-ratio: 3/4.5;
-      background: #ffffff;
-      border-radius: 20px;
-      border: 4px solid #dcdcdc;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      animation: fadeIn 0.4s ease;
-    }
+  .card {
+    width: 100%;
+    height: 100vh; /* Carta ocupa toda la pantalla */
+    background: #ffffff;
+    border-radius: 0; /* Sin bordes para que encaje perfecto */
+    border: none;
+    box-shadow: none;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.4s ease;
+    overflow-y: auto; /* Por si hay mucho texto */
+  }
 
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid #ccc;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    }
+  .card img {
+    width: 100%;
+    height: 40vh; /* Imagen ocupa 40% de la pantalla */
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
 
-    .title {
-      margin-top: 12px;
-      font-size: 22px;
-      font-weight: 700;
-      text-align: center;
-      color: #222;
-      letter-spacing: 0.5px;
-    }
+  .title {
+    margin-top: 12px;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    color: #222;
+  }
 
-    .stats-box {
-      margin-top: 12px;
-      background: #f7f7f7;
-      border-radius: 14px;
-      padding: 12px;
-      border: 1px solid #e0e0e0;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+  .stats-box {
+    margin-top: 12px;
+    background: #f7f7f7;
+    border-radius: 14px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    flex-grow: 1;
+  }
 
-    .stat {
-      font-size: 15px;
-      margin: 4px 0;
-      color: #444;
-    }
+  .stat {
+    font-size: 17px;
+    margin: 6px 0;
+    color: #444;
+  }
 
-    .stat b {
-      color: #111;
-    }
+  .stat b {
+    color: #111;
+  }
 
-    .back-btn {
-      margin-top: 15px;
-      padding: 10px;
-      background: #333;
-      color: white;
-      text-align: center;
-      border-radius: 10px;
-      font-size: 15px;
-      text-decoration: none;
-      display: block;
-      font-weight: 600;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
+  .back-btn {
+    margin-top: 15px;
+    padding: 15px;
+    background: #333;
+    color: white;
+    text-align: center;
+    border-radius: 12px;
+    font-size: 18px;
+    text-decoration: none;
+    display: block;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
 
-    .back-btn:hover {
-      background: #555;
-    }
+  .back-btn:hover {
+    background: #555;
+  }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .not-found {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      border: 2px solid #ccc;
-      text-align: center;
-      font-weight: bold;
-      color: #333;
-      max-width: 300px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-  </style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
 </head>
 
 <body>
