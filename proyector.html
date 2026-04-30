@@ -8,107 +8,150 @@
 <head>
   <meta charset="UTF-8">
   <title>Detalles del Proyector</title>
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyector</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      background: #f0f2f5; /* El mismo fondo que el index */
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", Arial, sans-serif;
+    background: #f0f2f5; /* Color del index */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    width: 100%;
+    height: 100vh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* FOTO - Mismo formato exacto que tenías */
+  .card img {
+    width: 100%;
+    height: 42vh;     
+    object-fit: contain;  
+    background: #1a1a1a; /* Fondo oscuro para que resalte el producto */
+    box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+  }
+
+  /* TÍTULO - Tus 80px pero con el color del index */
+  .title {
+    font-size: 80px; 
+    font-weight: 800;
+    text-align: center;
+    margin: 10px 0;
+    color: #2c3e50; /* Azul oscuro del index */
+  }
+
+  /* CAJA DE TEXTO - Tus 55vh con el nuevo estilo */
+  .stats-box {
+    height: 55vh; 
+    overflow-y: auto;
+    padding: 20px;
+    background: #fdfdfd;
+    border-top: 4px solid #3498db; /* Línea azul marca */
+  }
+
+  /* TEXTO - Tus 50px con el color del index */
+  .stat {
+    font-size: 50px; 
+    margin: 12px 0;
+    color: #333;
+    line-height: 1.5;
+    border-bottom: 1px solid #eee; /* Separador sutil */
+  }
+
+  .stat b {
+    color: #3498db; /* Negritas en azul para que combine */
+  }
+
+  /* BOTÓN - Tu posición y tamaño exacto, pero con el diseño nuevo */
+  .back-btn {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 30px 60px;
+    background: #2c3e50; /* Azul oscuro coherente */
+    color: #fff;
+
+    font-size: 32px;
+    font-weight: 900;
+
+    border-radius: 30px;
+    text-decoration: none;
+    display: block;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
+    z-index: 9999;
+  }
+  
+  .back-btn:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+</style>
+</head>
+<body>
+
+<div id="contenido">Cargando...</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const proyectorID = params.get("proyector");
+
+fetch("proyectores.json")
+  .then(res => res.json())
+  .then(data => {
+
+    const proyector = data.find(p => p.id === proyectorID);
+
+    if (!proyector) {
+      document.getElementById("contenido").innerHTML =
+        `<div style="font-size:40px; text-align:center; padding-top:50px;">❌ Proyector no encontrado</div>`;
+      return;
     }
 
-    .card {
-      width: 100%;
-      height: 100vh;
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      /* Eliminamos bordes para que sea full screen en móvil */
-    }
+    const foto = proyector.foto
+      ? `Proyectores-IMG/${proyector.foto}`
+      : "Proyectores-IMG/no-image.png";
 
-    /* FOTO - Manteniendo el tamaño que pediste */
-    .card img {
-      width: 100%;
-      height: 42vh;
-      object-fit: contain;
-      background: #1a1a1a; /* Fondo oscuro para que resalte el proyector */
-      box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
-    }
+    document.getElementById("contenido").innerHTML = `
+      <div class="card">
+        <img src="${foto}" alt="Foto del proyector">
 
-    /* TÍTULO - Manteniendo el tamaño pero mejorando el estilo */
-    .title {
-      font-size: 80px; 
-      font-weight: 900;
-      text-align: center;
-      padding: 20px 10px;
-      color: #2c3e50;
-      background: #fff;
-      margin: 0;
-      letter-spacing: -2px;
-      line-height: 1;
-    }
+        <div class="title">${proyector.id} – ${proyector.modelo}</div>
 
-    /* CAJA DE TEXTO - Estilo coherente con el index */
-    .stats-box {
-      height: 55vh;
-      overflow-y: auto;
-      padding: 30px;
-      background: #fdfdfd;
-      border-top: 4px solid #3498db; /* Línea azul marca de la casa */
-    }
+        <div class="stats-box">
+          <div class="stat"><b>Marca:</b> ${proyector.marca}</div>
+          <div class="stat"><b>Nº Serie:</b> ${proyector.numero_serie}</div>
+          <div class="stat"><b>Lámpara:</b> ${proyector.tipo_lampara}</div>
+          <div class="stat"><b>Precio:</b> ${proyector.precio}</div>
+          <div class="stat"><b>Horas:</b> ${proyector.horas}</div>
+          <div class="stat"><b>Resolución:</b> ${proyector.resolucion}</div>
+          <div class="stat"><b>Conexiones:</b> ${proyector.conexiones}</div>
+          <div class="stat"><b>Incidencia:</b> ${proyector.incidencia || "Ninguna"}</div>
+          <div class="stat"><b>Ubicación:</b> ${proyector.ubicacion}</div>
+          <div style="height: 120px;"></div>
+        </div>
 
-    /* TEXTO GIGANTE - Manteniendo los 50px */
-    .stat {
-      font-size: 50px; 
-      margin: 20px 0;
-      color: #333;
-      line-height: 1.3;
-      border-bottom: 1px solid #f0f0f0;
-      padding-bottom: 10px;
-    }
+        <a href="index.html" class="back-btn">⬅ Volver</a>
+      </div>
+    `;
+  });
+</script>
 
-    .stat b {
-      color: #3498db; /* Los títulos de los datos ahora son azules */
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-
-    /* BOTÓN VOLVER - Negro total como el anterior pero con mejor sombra */
-    .back-btn {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 30px 60px;
-      background: #2c3e50; /* Un azul muy oscuro para combinar mejor */
-      color: #fff;
-      font-size: 32px;
-      font-weight: 900;
-      border-radius: 50px; /* Más redondeado, estilo cápsula */
-      text-decoration: none;
-      display: block;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-      z-index: 9999;
-      transition: transform 0.2s;
-    }
-
-    .back-btn:active {
-      transform: translateX(-50%) scale(0.95);
-    }
-
-    /* Scrollbar discreto */
-    .stats-box::-webkit-scrollbar {
-      width: 8px;
-    }
-    .stats-box::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 10px;
-    }
-  </style>
+</body>
+</html>
 </head>
 <body>
 
