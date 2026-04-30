@@ -4,31 +4,43 @@
   <meta charset="UTF-8">
   <title>Proyectores</title>
 <style>
-  body { font-family: 'Arial', sans-serif; background: #e0e5ec; padding: 20px; }
-  h1 { color: #444; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); text-align: center; }
-
-  .grupo-marca h2 { font-size: 2.3em; color: #31344b; margin-bottom: 0; }
-  .grupo-marca hr { border-top: 3px solid #babecc; opacity: 0.5; }
-
-  .cards-fila { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-
-  .card {
-    background: #e0e5ec;
-    border-radius: 25px;
+  body { 
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh; font-family: 'Segoe UI', sans-serif; padding: 15px;
+  }
+  
+  .grupo-marca {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
     padding: 20px;
-    /* Doble sombra para efecto relieve */
-    box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5);
-    border: none;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255,255,255,0.3);
   }
 
-  .card strong { color: #444; font-size: 1.1em; border-bottom: 2px solid #3498db; display: inline-block; }
-  .card p { color: #555; font-weight: 600; }
-  
+  .card {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  }
+
+  /* Colores pastel en los bordes para identificar el modelo */
+  .grupo-modelo h3 { 
+    background: #a29bfe; color: white; display: inline-block;
+    padding: 5px 15px; border-radius: 20px; font-size: 0.9em;
+  }
+
+  .card .incidencia {
+    background: #ff7675; color: white; padding: 5px;
+    border-radius: 5px; font-size: 0.8em; margin-top: 5px;
+  }
+
   .card a {
-    margin-top: 15px; display: inline-block;
-    color: #3498db; font-weight: 800; text-decoration: none;
-    padding: 10px 15px; border-radius: 15px;
-    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+    color: #6c5ce7; font-weight: bold; text-decoration: none;
+    border: 2px solid #6c5ce7; padding: 5px 10px; border-radius: 10px;
+    display: block; text-align: center; margin-top: 10px;
   }
 </style>
 </head>
