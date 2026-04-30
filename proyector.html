@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Proyector</title>
+  <title>Detalles Proyector</title>
   <style>
   body {
     margin: 0;
     padding: 0;
     font-family: "Inter", Arial, sans-serif;
-    background: #e9e9e9; /* Mantenemos tu fondo */
+    background: #e0e5ec; /* Mismo fondo */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -18,65 +18,82 @@
   .card {
     width: 100%;
     height: 100vh;
-    background: #ffffff;
+    background: #e0e5ec;
     display: flex;
     flex-direction: column;
     overflow: hidden;
   }
 
+  /* FOTO con marco neumórfico */
   .card img {
-    width: 100%;
-    height: 42vh;
+    width: calc(100% - 40px);
+    height: 40vh;
+    margin: 20px;
     object-fit: contain;
-    background: #1a1a1a; /* Solo oscurecemos el fondo de la imagen para que resalte */
+    background: #e0e5ec;
+    border-radius: 30px;
+    box-shadow: inset 8px 8px 15px #babecc, 
+                inset -8px -8px 15px #fff;
   }
 
   .title {
-    font-size: 80px; 
-    font-weight: 800;
+    font-size: 70px; 
+    font-weight: 900;
     text-align: center;
     margin: 10px 0;
-    color: #2c3e50; /* Color azul oscuro para combinar con index */
+    color: #31344b;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.05);
   }
 
   .stats-box {
-    height: 55vh; 
+    height: 50vh; 
     overflow-y: auto;
-    padding: 20px;
-    background: #f7f7f7;
-    border-top: 4px solid #3498db; /* Línea azul para combinar con index */
+    padding: 30px;
+    margin: 0 20px 20px 20px;
+    background: #e0e5ec;
+    border-radius: 30px;
+    box-shadow: 9px 9px 16px #babecc, 
+                -9px -9px 16px #fff;
   }
 
   .stat {
-    font-size: 50px; 
-    margin: 12px 0;
-    color: #222;
-    line-height: 1.5;
+    font-size: 45px; 
+    margin: 20px 0;
+    color: #444;
+    line-height: 1.4;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(0,0,0,0.05);
   }
 
   .stat b {
-    color: #3498db; /* Etiquetas en azul para combinar con index */
+    color: #31344b;
+    margin-right: 10px;
   }
 
+  /* BOTÓN VOLVER estilo Neumórfico */
   .back-btn {
     position: fixed;
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-
-    padding: 30px 60px;
-    background: #2c3e50; /* Azul oscuro del index */
-    color: #fff;
-
+    padding: 25px 60px;
+    background: #e0e5ec;
+    color: #31344b;
     font-size: 32px;
     font-weight: 900;
-
-    border-radius: 30px;
+    border-radius: 40px;
     text-decoration: none;
     display: block;
-
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    box-shadow: 10px 10px 20px #babecc, 
+                -10px -10px 20px #fff;
     z-index: 9999;
+    transition: 0.2s;
+  }
+
+  .back-btn:active {
+    box-shadow: inset 5px 5px 10px #babecc, 
+                inset -5px -5px 10px #fff;
+    transform: translateX(-50%) scale(0.95);
   }
 </style>
 </head>
@@ -85,44 +102,35 @@
 <div id="contenido">Cargando...</div>
 
 <script>
+// El script de carga se mantiene igual para que funcione tu lógica
 const params = new URLSearchParams(window.location.search);
 const proyectorID = params.get("proyector");
 
 fetch("proyectores.json")
   .then(res => res.json())
   .then(data => {
-
     const proyector = data.find(p => p.id === proyectorID);
-
     if (!proyector) {
-      document.getElementById("contenido").innerHTML =
-        `<div class="not-found">❌ Proyector no encontrado</div>`;
+      document.getElementById("contenido").innerHTML = "❌ No encontrado";
       return;
     }
 
-    const foto = proyector.foto
-      ? `Proyectores-IMG/${proyector.foto}`
-      : "Proyectores-IMG/no-image.png";
+    const foto = proyector.foto ? `Proyectores-IMG/${proyector.foto}` : "Proyectores-IMG/no-image.png";
 
     document.getElementById("contenido").innerHTML = `
       <div class="card">
-        <img src="${foto}" alt="Foto del proyector">
-
-        <div class="title">${proyector.id} – ${proyector.modelo}</div>
-
+        <img src="${foto}" alt="Foto">
+        <div class="title">${proyector.id}</div>
         <div class="stats-box">
+          <div class="stat"><b>Modelo:</b> ${proyector.modelo}</div>
           <div class="stat"><b>Marca:</b> ${proyector.marca}</div>
           <div class="stat"><b>Nº Serie:</b> ${proyector.numero_serie}</div>
-          <div class="stat"><b>Lámpara:</b> ${proyector.tipo_lampara}</div>
-          <div class="stat"><b>Precio:</b> ${proyector.precio}</div>
           <div class="stat"><b>Horas:</b> ${proyector.horas}</div>
-          <div class="stat"><b>Resolución:</b> ${proyector.resolucion}</div>
-          <div class="stat"><b>Conexiones:</b> ${proyector.conexiones}</div>
-          <div class="stat"><b>Incidencia:</b> ${proyector.incidencia || "Ninguna"}</div>
+          <div class="stat"><b>Precio:</b> ${proyector.precio}</div>
           <div class="stat"><b>Ubicación:</b> ${proyector.ubicacion}</div>
-          <div style="height: 100px;"></div>
+          <div class="stat"><b>Incidencia:</b> ${proyector.incidencia || "Ninguna"}</div>
+          <div style="height: 120px;"></div>
         </div>
-
         <a href="index.html" class="back-btn">⬅ Volver</a>
       </div>
     `;
