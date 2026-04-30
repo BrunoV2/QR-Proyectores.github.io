@@ -3,164 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <title>Proyectores</title>
- <style>
-  /* Base y Fondo */
+<style>
   body { 
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    font-family: 'Inter', sans-serif; 
     padding: 15px; 
-    background-color: #f0f2f5; /* Gris muy claro azulado para que resalten las sombras */
-    color: #1a1a1a;
+    background-color: #fcfcfc; 
+    color: #333; 
     margin: 0;
   }
+  h1 { text-align: center; font-weight: 900; color: #444; margin-bottom: 30px; }
 
-  h1 {
-    text-align: center;
-    font-weight: 800;
-    color: #2c3e50;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    margin-bottom: 30px;
+  .grupo-marca { margin-bottom: 40px; }
+  .grupo-marca h2 { 
+    font-size: 2em; font-weight: 900; color: #2d3436; 
+    padding-left: 10px; border-left: 6px solid #fab1a0; 
+  }
+  .grupo-marca hr { display: none; }
+
+  .grupo-modelo h3 { 
+    font-size: 1.1em; color: #636e72; text-transform: uppercase; 
+    margin: 20px 0 10px 10px; letter-spacing: 1px;
   }
 
-  /* Contenedor de Marca */
-  .grupo-marca {
-    margin-bottom: 40px;
-    background: rgba(255, 255, 255, 0.5);
-    padding: 15px;
-    border-radius: 20px;
-    box-shadow: inset 0 0 10px rgba(255,255,255,0.8);
-  }
+  .cards-fila { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
-  .grupo-marca h2 {
-    margin-bottom: 5px;
-    font-size: 2.1em;
-    font-weight: 900;
-    color: #1a1a1a;
-    text-shadow: 1px 1px 0px #fff;
-  }
-
-  .grupo-marca hr {
-    border: none;
-    border-top: 4px solid #3498db; /* Línea de color marca */
-    width: 60px;
-    margin: 0 0 20px 0;
-    border-radius: 10px;
-  }
-
-  /* Contenedor de Modelo */
-  .grupo-modelo {
-    margin-left: 0; /* Centrado para móvil */
-    margin-bottom: 25px;
-  }
-
-  .grupo-modelo h3 {
-    color: #7f8c8d;
-    margin-bottom: 15px;
-    font-size: 1.2em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    display: flex;
-    align-items: center;
-  }
-
-  .grupo-modelo h3::before {
-    content: "";
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background: #3498db;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-
-  /* Grid de Tarjetas */
-  .cards-fila {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Mantiene tu diseño de 2 columnas */
-    gap: 15px;
-  }
-
-  /* Tarjeta Individual (La Joya) */
   .card {
-    background: #ffffff;
-    border: none; /* Quitamos el borde sólido aburrido */
-    padding: 20px;
-    border-radius: 18px;
-    position: relative;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    
-    /* Sombra elegante y profunda */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05), 
-                0 6px 6px rgba(0,0,0,0.03);
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    background: #fff;
+    border-radius: 20px;
+    padding: 15px;
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.02);
+    transition: transform 0.2s;
   }
+  .card:active { transform: scale(0.96); }
+  
+  /* Colores pastel por posición o puedes mapearlos por marca */
+  .card:nth-child(odd) { background-color: #f0f7ff; } /* Azul pastel */
+  .card:nth-child(even) { background-color: #fff9f0; } /* Naranja pastel */
 
-  .card:active {
-    transform: scale(0.97); /* Efecto de pulsación al tocar en móvil */
+  .card strong { font-size: 1.2em; color: #2d3436; margin-bottom: 5px; }
+  .card p { font-size: 0.85em; color: #555; margin: 4px 0; }
+  .card .incidencia { 
+    color: #d63031; font-size: 0.8em; font-weight: bold;
+    background: rgba(255,255,255,0.6); padding: 5px; border-radius: 8px;
   }
-
-  .card strong {
-    display: block;
-    font-size: 1.3em;
-    margin-bottom: 10px;
-    color: #2c3e50;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 5px;
-  }
-
-  .card p {
-    margin: 6px 0;
-    font-size: 0.9em;
-    color: #555;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  /* Colores para estados específicos */
-  .card .incidencia {
-    color: #e74c3c;
-    background: #fdf2f2;
-    padding: 8px;
-    border-radius: 8px;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 0.85em;
-    margin-top: 10px;
-    border-left: 3px solid #e74c3c;
-  }
-
-  /* Botón Ver Detalles */
   .card a {
-    display: block;
-    margin-top: 15px;
-    text-decoration: none;
-    color: #ffffff;
-    background: #2c3e50;
-    text-align: center;
-    padding: 10px;
-    border-radius: 12px;
-    font-size: 0.85em;
-    font-weight: 700;
-    transition: background 0.3s ease;
-  }
-
-  .card a:hover {
-    background: #34495e;
-  }
-
-  /* Estilo para "No disponible" */
-  .no-disponible-label {
-    background: #fff3e0;
-    color: #e67e22 !important;
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-weight: bold;
-    display: inline-block;
+    display: block; text-align: center; margin-top: 10px;
+    padding: 8px; background: #2d3436; color: #fff;
+    border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.8em;
   }
 </style>
 </head>
