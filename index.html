@@ -3,73 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <title>Proyectores</title>
-  <style>
-    body { font-family: Arial; padding: 20px; }
+ <style>
+  /* Base y Fondo */
+  body { 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    padding: 15px; 
+    background-color: #f0f2f5; /* Gris muy claro azulado para que resalten las sombras */
+    color: #1a1a1a;
+    margin: 0;
+  }
 
-    .grupo-marca {
-      margin-bottom: 30px;
-    }
-    .grupo-marca h2 {
-      margin-bottom: 5px;
-      font-size: 2.3em;
-      font-weight: 900;
-    }
-    .grupo-marca hr {
-      border: none;
-      border-top: 2px solid #aaa;
-      margin-bottom: 15px;
-    }
+  h1 {
+    text-align: center;
+    font-weight: 800;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+  }
 
-    .grupo-modelo {
-      margin-left: 15px;
-      margin-bottom: 15px;
-    }
-    .grupo-modelo h3 {
-      color: #555;
-      margin-bottom: 8px;
-      font-size: 1.8em;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
+  /* Contenedor de Marca */
+  .grupo-marca {
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.8);
+  }
 
-    .cards-fila {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
+  .grupo-marca h2 {
+    margin-bottom: 5px;
+    font-size: 2.1em;
+    font-weight: 900;
+    color: #1a1a1a;
+    text-shadow: 1px 1px 0px #fff;
+  }
 
-    .card {
-      border: 1px solid #ccc;
-      padding: 18px;
-      border-radius: 10px;
-    }
+  .grupo-marca hr {
+    border: none;
+    border-top: 4px solid #3498db; /* Línea de color marca */
+    width: 60px;
+    margin: 0 0 20px 0;
+    border-radius: 10px;
+  }
 
-    .card strong {
-      display: block;
-      font-size: 1.1em;
-      margin-bottom: 8px;
-    }
+  /* Contenedor de Modelo */
+  .grupo-modelo {
+    margin-left: 0; /* Centrado para móvil */
+    margin-bottom: 25px;
+  }
 
-    .card p {
-      margin: 5px 0;
-      font-size: 0.95em;
-      color: #333;
-    }
+  .grupo-modelo h3 {
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+  }
 
-    .card .incidencia {
-      color: #c0392b;
-      font-style: italic;
-    }
+  .grupo-modelo h3::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #3498db;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
 
-    .card a {
-      display: inline-block;
-      margin-top: 10px;
-      text-decoration: none;
-      color: blue;
-      font-size: 0.9em;
-    }
-  </style>
+  /* Grid de Tarjetas */
+  .cards-fila {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Mantiene tu diseño de 2 columnas */
+    gap: 15px;
+  }
+
+  /* Tarjeta Individual (La Joya) */
+  .card {
+    background: #ffffff;
+    border: none; /* Quitamos el borde sólido aburrido */
+    padding: 20px;
+    border-radius: 18px;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    /* Sombra elegante y profunda */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05), 
+                0 6px 6px rgba(0,0,0,0.03);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card:active {
+    transform: scale(0.97); /* Efecto de pulsación al tocar en móvil */
+  }
+
+  .card strong {
+    display: block;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 5px;
+  }
+
+  .card p {
+    margin: 6px 0;
+    font-size: 0.9em;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Colores para estados específicos */
+  .card .incidencia {
+    color: #e74c3c;
+    background: #fdf2f2;
+    padding: 8px;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.85em;
+    margin-top: 10px;
+    border-left: 3px solid #e74c3c;
+  }
+
+  /* Botón Ver Detalles */
+  .card a {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #ffffff;
+    background: #2c3e50;
+    text-align: center;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 700;
+    transition: background 0.3s ease;
+  }
+
+  .card a:hover {
+    background: #34495e;
+  }
+
+  /* Estilo para "No disponible" */
+  .no-disponible-label {
+    background: #fff3e0;
+    color: #e67e22 !important;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    display: inline-block;
+  }
+</style>
 </head>
 <body>
 <h1>Lista de Proyectores</h1>
