@@ -8,11 +8,12 @@
     margin: 0;
     padding: 0;
     font-family: "Inter", Arial, sans-serif;
-    background: #e0e5ec; /* Mismo fondo */
+    background: #e0e5ec; 
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
 
   .card {
@@ -21,56 +22,62 @@
     background: #e0e5ec;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
   }
 
-  /* FOTO con marco neumórfico */
+  /* FOTO - Centrada con márgenes laterales */
   .card img {
-    width: calc(100% - 40px);
-    height: 40vh;
-    margin: 20px;
+    width: 85%; /* Menos ancho para que se vea el margen */
+    height: 38vh;
+    margin: 20px auto; /* Centrado automático derecha/izquierda */
     object-fit: contain;
     background: #e0e5ec;
     border-radius: 30px;
+    display: block;
     box-shadow: inset 8px 8px 15px #babecc, 
                 inset -8px -8px 15px #fff;
   }
 
   .title {
-    font-size: 70px; 
+    font-size: 75px; 
     font-weight: 900;
     text-align: center;
-    margin: 10px 0;
+    margin: 5px 0;
     color: #31344b;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.05);
   }
 
+  /* CAJA DE INFORMACIÓN - Color diferente y relieve marcado */
   .stats-box {
-    height: 50vh; 
+    height: 52vh; 
     overflow-y: auto;
-    padding: 30px;
-    margin: 0 20px 20px 20px;
-    background: #e0e5ec;
-    border-radius: 30px;
-    box-shadow: 9px 9px 16px #babecc, 
-                -9px -9px 16px #fff;
+    padding: 35px;
+    margin: 0 25px 25px 25px;
+    /* Cambio a color blanco pastel para diferenciarlo */
+    background: #f0f2f5; 
+    border-radius: 40px;
+    /* Sombra hacia afuera para que parezca que flota sobre el fondo */
+    box-shadow: 12px 12px 20px #babecc, 
+                -10px -10px 20px #fff;
+    border: 1px solid rgba(255,255,255,0.5);
   }
 
   .stat {
-    font-size: 45px; 
+    font-size: 50px; 
     margin: 20px 0;
     color: #444;
-    line-height: 1.4;
+    line-height: 1.3;
     padding-bottom: 15px;
     border-bottom: 2px solid rgba(0,0,0,0.05);
   }
 
   .stat b {
-    color: #31344b;
-    margin-right: 10px;
+    color: #3498db; /* Azul para resaltar los títulos */
+    margin-right: 15px;
+    text-transform: uppercase;
+    font-size: 0.9em;
   }
 
-  /* BOTÓN VOLVER estilo Neumórfico */
+  /* BOTÓN VOLVER */
   .back-btn {
     position: fixed;
     bottom: 40px;
@@ -84,17 +91,21 @@
     border-radius: 40px;
     text-decoration: none;
     display: block;
-    box-shadow: 10px 10px 20px #babecc, 
-                -10px -10px 20px #fff;
+    box-shadow: 8px 8px 15px #babecc, 
+                -8px -8px 15px #fff;
     z-index: 9999;
     transition: 0.2s;
   }
 
   .back-btn:active {
-    box-shadow: inset 5px 5px 10px #babecc, 
-                inset -5px -5px 10px #fff;
-    transform: translateX(-50%) scale(0.95);
+    box-shadow: inset 4px 4px 10px #babecc, 
+                inset -4px -4px 10px #fff;
+    transform: translateX(-50%) scale(0.96);
   }
+
+  /* Estética del scroll */
+  .stats-box::-webkit-scrollbar { width: 10px; }
+  .stats-box::-webkit-scrollbar-thumb { background: #babecc; border-radius: 10px; }
 </style>
 </head>
 <body>
@@ -102,7 +113,6 @@
 <div id="contenido">Cargando...</div>
 
 <script>
-// El script de carga se mantiene igual para que funcione tu lógica
 const params = new URLSearchParams(window.location.search);
 const proyectorID = params.get("proyector");
 
@@ -129,7 +139,7 @@ fetch("proyectores.json")
           <div class="stat"><b>Precio:</b> ${proyector.precio}</div>
           <div class="stat"><b>Ubicación:</b> ${proyector.ubicacion}</div>
           <div class="stat"><b>Incidencia:</b> ${proyector.incidencia || "Ninguna"}</div>
-          <div style="height: 120px;"></div>
+          <div style="height: 130px;"></div>
         </div>
         <a href="index.html" class="back-btn">⬅ Volver</a>
       </div>
