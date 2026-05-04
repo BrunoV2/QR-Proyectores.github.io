@@ -25,26 +25,27 @@
       padding-top: 10px;
     }
 
-    /* FOTO - Limpia, sin bordes extra, centrada y amplia */
+    /* FOTO - Más grande y con bordes redondeados */
     .img-wrapper {
-      width: 90%;
-      height: 32vh;
+      width: 92%;
+      height: 45vh; /* Aumentado para que sea más grande */
       margin: 0 auto;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden; /* Asegura que la imagen no se salga del radio */
     }
 
     .img-wrapper img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      /* Filtro sutil para que los blancos de la imagen no choquen con el gris del fondo */
-      filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.05));
+      border-radius: 40px; /* Bordes redondeados para la foto */
+      filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.08));
     }
 
     .title {
-      font-size: 55px; /* Ajustado para que no sea tan exagerado en móviles */
+      font-size: 55px; 
       font-weight: 900;
       text-align: center;
       margin: 10px 0;
@@ -52,14 +53,13 @@
       letter-spacing: -2px;
     }
 
-    /* CAJA DE CARACTERÍSTICAS - Blanca, cerrada y elegante */
+    /* CAJA DE CARACTERÍSTICAS - Blanca y cerrada */
     .stats-box {
       flex: 1;
-      margin: 10px 25px 110px 25px; /* Margen inferior amplio para el botón */
+      margin: 10px 25px 110px 25px; 
       padding: 30px;
       background: #ffffff; 
       border-radius: 40px;
-      /* Sombra neumórfica clásica hacia afuera */
       box-shadow: 12px 12px 24px #babecc, 
                   -12px -12px 24px #ffffff;
       overflow-y: auto;
@@ -85,11 +85,10 @@
       letter-spacing: 1px;
     }
 
-    /* Estilo del scroll para que sea estético */
     .stats-box::-webkit-scrollbar { width: 8px; }
     .stats-box::-webkit-scrollbar-thumb { background: #babecc; border-radius: 10px; }
 
-    /* BOTÓN VOLVER - Neumórfico oscuro */
+    /* BOTÓN VOLVER */
     .back-btn {
       position: fixed;
       bottom: 30px;
@@ -102,15 +101,12 @@
       font-weight: 800;
       border-radius: 50px;
       text-decoration: none;
-      box-shadow: 8px 8px 20px rgba(0,0,0,0.2),
-                  inset 2px 2px 5px rgba(255,255,255,0.1);
+      box-shadow: 8px 8px 20px rgba(0,0,0,0.2);
       z-index: 9999;
-      transition: all 0.2s ease;
     }
 
     .back-btn:active {
       transform: translateX(-50%) scale(0.92);
-      box-shadow: inset 4px 4px 10px rgba(0,0,0,0.5);
     }
   </style>
 </head>
